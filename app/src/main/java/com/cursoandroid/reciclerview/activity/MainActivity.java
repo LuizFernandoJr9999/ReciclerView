@@ -5,12 +5,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.cursoandroid.reciclerview.DisplayMessageActivity;
 import com.cursoandroid.reciclerview.R;
 import com.cursoandroid.reciclerview.RecyclerItemClickListener;
 import com.cursoandroid.reciclerview.adapter.Adapter;
@@ -20,6 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     private RecyclerView recyclerView;
     private List<Filme> listaFilmes = new ArrayList<>();
@@ -80,7 +85,15 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
-
+    /*Called when the user taps the Send button */
+    public void sendMessage(View view){
+        // Do something in response to button.
+        Intent intent = new Intent(this , DisplayMessageActivity.class);
+        EditText editText = (EditText) findViewById(R.id.editText);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE ,message);
+        startActivity(intent);
+    }
     public void criarFilmes(){
 
         Filme filme = new Filme("título" , "genero" , "2017");
