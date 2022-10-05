@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cursoandroid.reciclerview.DisplayMessageActivity;
@@ -23,9 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-
     private RecyclerView recyclerView;
     private List<Filme> listaFilmes = new ArrayList<>();
 
@@ -33,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get the Intent that started this activity and extract the string
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(DisplayMessageActivity.EXTRA_MESSAGE);
+
+        // Capture the layout's TextView and set the string as its text.
+        //TextView textView = findViewById(R.id.textView );
+        //textView.setText(message);
 
         recyclerView =findViewById(R.id.recycleView);
 
@@ -85,21 +91,12 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
-    /*Called when the user taps the Send button */
-    public void sendMessage(View view){
-        // Do something in response to button.
-        Intent intent = new Intent(this , DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE ,message);
-        startActivity(intent);
-    }
     public void criarFilmes(){
 
-        Filme filme = new Filme("título" , "genero" , "2017");
+        Filme filme = new Filme("Areia" , "Kg" , "100");
         listaFilmes.add(filme);
 
-        filme = new Filme("Homem Aranha - De volta ao lar" , "Fucção" , "2017");
+        filme = new Filme("Tijolo Baiano" , "Unidade" , "1000");
         listaFilmes.add(filme);
 
         filme = new Filme("Mulher Maravilha" , "Fantasia" , "2017");
